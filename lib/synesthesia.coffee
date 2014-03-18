@@ -1,20 +1,16 @@
 SynesthesiaView = require("./synesthesia-view")
+window.syn = {}
+window.syn.SoundEffects = require("./sound_effects")
+window.syn.Parser = require("./parser")
+
+console.log(syn.Parser)
+
 module.exports =
   activate: (state) ->
     atom.workspaceView.command "synesthesia:toggle", @toggle
     return
 
   toggle: ->
-    require "./timbre.js"
-    window.syn = {}
-    syn.sound = timbre "sin",
-      freq: 300
-
-    syn.sound.play()
-    freq = 300
+    parser = new window.syn.Parser
+    parser.analyze()
     return
-
-#setInterval(function(){
-#      freq++;
-#      syn.sound.set({freq:freq});
-#    }, 20);
